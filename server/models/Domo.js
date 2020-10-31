@@ -6,9 +6,9 @@ let DomoModel = {};
 
 
 const ConvertId = mongoose.Types.ObjectId;
-const setName = (Name) => _.escape(name).trim();
+const setName = (name) => _.escape(name).trim();
 
-const DomoSchema = new mongoose.Mongoose.Schema({
+const DomoSchema = new mongoose.Schema({
   name:{
     type: String,
     required: true,
@@ -25,7 +25,7 @@ const DomoSchema = new mongoose.Mongoose.Schema({
     required: true,
     ref: 'Account',
   },
-  ConvertId: {
+  createdDate: {
     type: Date,
     default: Date.now,
   }
