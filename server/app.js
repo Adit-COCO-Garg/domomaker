@@ -10,7 +10,7 @@ const session = require('express-session');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
-const dbURL = process.env.MONGO_URI || 'mongodb://localhost/27017';
+const dbURL = process.env.MONGO_URI;
 
 const mongooseOptions = {
   useNewUrlParser: true,
