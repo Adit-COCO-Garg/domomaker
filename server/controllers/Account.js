@@ -14,7 +14,7 @@ const signupPage = (req, res) => {
 
 const logout = (req, res) => {
   req.session.destroy();
-  res.redirect('/');
+  // res.redirect('/');
 };
 
 const login = (req, res) => {
