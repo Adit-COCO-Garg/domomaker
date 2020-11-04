@@ -21,7 +21,7 @@
     "Redis",
     "Login"
   ],
-  "author": "Cody Van De Mark",
+  "author": "Cody Van De Mark; Adit Garg",
   "license": "Apache 2.0",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
