@@ -34,17 +34,17 @@ let redisURL = {
   hostname: 'redis-11107.c8.us-east-1-4.ec2.cloud.redislabs.com',
   port: '11107',
 };
-let redisPass = '';
+let redisPASS = '';
 
 if (process.env.REDISCLOUD_URL) {
   redisURL = url.parse(process.env.REDISCLOUD_URL);
-  [, redisPass] = redisURL.auth.split(':');
+  [, redisPASS] = redisURL.auth.split(':');
 }
 
 const redisClient = redis.createClient({
   host: redisURL.hostname,
   port: redisURL.port,
-  password: redisPass,
+  password: redisPASS,
 });
 
 const router = require('./router.js');
