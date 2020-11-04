@@ -54,7 +54,7 @@ const signup = (req, res) => {
     try {
       await newAccount.save();
       req.session.account = Account.AccountModel.toAPI(newAccount);
-      return res.json({redirect: '/maker'})
+      return res.json({ redirect: '/maker' });
     } catch (e) {
       if (e.code === 11000) {
         return res.status(400).json({ error: 'Username already in use' });

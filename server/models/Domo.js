@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 mongoose.Promise = global.Promise;
 const _ = require('underscore');
 
@@ -9,14 +10,14 @@ const ConvertId = mongoose.Types.ObjectId;
 const setName = (name) => _.escape(name).trim();
 
 const DomoSchema = new mongoose.Schema({
-  name:{
+  name: {
     type: String,
     required: true,
     trim: true,
     set: setName,
   },
   age: {
-    type: Number, 
+    type: Number,
     min: 0,
     required: true,
   },
@@ -28,7 +29,7 @@ const DomoSchema = new mongoose.Schema({
   createdDate: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 DomoSchema.statics.toAPI = (doc) => ({
@@ -45,4 +46,4 @@ DomoSchema.statics.findByOwner = (ownerId, callback) => {
 DomoModel = mongoose.model('Domo', DomoSchema);
 
 
-module.exports = {DomoModel, DomoSchema};
+module.exports = { DomoModel, DomoSchema };
