@@ -9,8 +9,8 @@ const expressHandlebars = require('express-handlebars');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session);
 const url = require('url');
-const redis = require('redis');
 const csrf = require('csurf');
+const redis = require('redis');
 
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
@@ -55,7 +55,7 @@ const app = express();
 app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
 app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
 app.use(compression());
-app.disable('x-powered-by');
+
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
@@ -75,6 +75,7 @@ app.use(session({
 app.engine('handlebars', expressHandlebars({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
+app.disable('x-powered-by');
 app.use(cookieParser());
 app.use(csrf());
 app.use((err, req, res, next) => {
