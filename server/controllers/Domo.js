@@ -30,10 +30,9 @@ const delDomo = (req, res) => {
   if (!req.body.id) {
     return res.status(400)({ error: 'Something went wrong, try refreshing' });
   }
-  Domo.DomoModel.deleteOne({_id:req.body.id}).then(e=>{
-    return res.status(200).json({ Success: 'Domo deleted!' });
-  });
-}
+  Domo.DomoModel.deleteOne({ _id: req.body.id }).then(() => res.status(200).json({ Success: 'Domo deleted!' }));
+  return true;
+};
 
 const makeDomo = (req, res) => {
   if (!req.body.name || !req.body.age || !req.body.img) {
@@ -60,4 +59,6 @@ const makeDomo = (req, res) => {
   });
   return domoPromise;
 };
-module.exports = { makerPage, makeDomo, getDomos, delDomo };
+module.exports = {
+  makerPage, makeDomo, getDomos, delDomo,
+};
