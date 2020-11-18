@@ -8,6 +8,7 @@ let DomoModel = {};
 
 const ConvertId = mongoose.Types.ObjectId;
 const setName = (name) => _.escape(name).trim();
+const setImg = (img) => _.escape(img).trim();
 
 const DomoSchema = new mongoose.Schema({
   name: {
@@ -20,6 +21,12 @@ const DomoSchema = new mongoose.Schema({
     type: Number,
     min: 0,
     required: true,
+  },
+  img: {
+    type: String,
+    trim: true,
+    required: true,
+    set: setImg,
   },
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -35,13 +42,14 @@ const DomoSchema = new mongoose.Schema({
 DomoSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   age: doc.age,
+  img: doc.img
 });
 
 DomoSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     owner: ConvertId(ownerId),
   };
-  return DomoModel.find(search).select('name age').lean().exec(callback);
+  return DomoModel.find(search).select('name age img').lean().exec(callback);
 };
 DomoModel = mongoose.model('Domo', DomoSchema);
 

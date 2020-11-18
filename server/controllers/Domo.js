@@ -13,13 +13,36 @@ const makerPage = (req, res) => {
 };
 
 
+const getDomos = (request, response) => {
+  const req = request;
+  const res = response;
+
+  return Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occured' });
+    }
+    return res.json({ domos: docs });
+  });
+};
+
+const delDomo = (req, res) => {
+  if (!req.body.id) {
+    return res.status(400)({ error: 'Something went wrong, try refreshing' });
+  }
+  Domo.DomoModel.deleteOne({_id:req.body.id}).then(e=>{
+    return res.status(200).json({ Success: 'Domo deleted!' });
+  });
+}
+
 const makeDomo = (req, res) => {
-  if (!req.body.name || !req.body.age) {
-    return res.status(400)({ error: 'Rawr! Both name and age are required!' });
+  if (!req.body.name || !req.body.age || !req.body.img) {
+    return res.status(400)({ error: 'Rawr! name, age, img are required!' });
   }
   const domoData = {
     name: req.body.name,
     age: req.body.age,
+    img: req.body.img,
     owner: req.session.account._id,
   };
 
@@ -37,4 +60,4 @@ const makeDomo = (req, res) => {
   });
   return domoPromise;
 };
-module.exports = { makerPage, makeDomo };
+module.exports = { makerPage, makeDomo, getDomos, delDomo };
